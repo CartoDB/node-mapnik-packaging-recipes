@@ -1,0 +1,44 @@
+#!/bin/bash
+mkdir /vagrant/opt
+cd /vagrant/opt
+
+echo -e 'LANG=en_US.UTF-8\nLC_ALL=en_US.UTF-8' | sudo tee /etc/default/locale
+source /etc/default/locale
+
+sudo apt-get update
+sudo apt-get install -y python-software-properties
+
+sudo apt-add-repository --yes ppa:cartodb/postgresql-9.3
+sudo apt-add-repository --yes ppa:cartodb/gis
+sudo add-apt-repository --yes ppa:cartodb/nodejs-010
+
+sudo apt-get update
+
+sudo apt-get install -y \
+    postgresql-9.3-postgis-2.1 postgresql-contrib-9.3 postgresql-server-dev-9.3 \
+    curl \
+    libicu-dev \
+    python-dev libxml2 libxml2-dev \
+    libfreetype6 libfreetype6-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libproj-dev \
+    libtiff-dev \
+    libcairo2 libcairo2-dev python-cairo python-cairo-dev \
+    libcairomm-1.0-1 libcairomm-1.0-dev \
+    ttf-unifont ttf-dejavu ttf-dejavu-core ttf-dejavu-extra \
+    build-essential python-nose \
+    libgdal1-dev python-gdal \
+    libsqlite3-dev \
+    git-core \
+    nodejs
+
+# use a newer protobuf-compiler
+wget https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz
+tar zxf protobuf-2.5.0.tar.gz protobuf-2.5.0
+cd protobuf-2.5.0
+./configure
+make
+sudo make install
+sudo ldconfig
+cd ..

@@ -1,0 +1,9 @@
+#!/bin/bash
+cd /vagrant/opt
+
+git clone https://github.com/CartoDB/node-mapnik
+cd node-mapnik
+git checkout 1.4.15-cdb
+./scripts/build_against_sdk.sh
+node ./node_modules/.bin/node-pre-gyp package testpackage
+cd ..

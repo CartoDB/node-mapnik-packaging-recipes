@@ -1,0 +1,39 @@
+#!/bin/bash
+cd /vagrant/opt
+
+# Change postgresql configuration
+echo -e "local\tall\tall\ttrust\nhost\tall\tall\t127.0.0.1/32\ttrust\nhost\tall\tall\t::1/128\ttrust" | sudo tee /etc/postgresql/9.3/main/pg_hba.conf
+sudo service postgresql restart
+
+# Install dependencies for tests
+wget http://download.redis.io/releases/redis-2.6.17.tar.gz
+tar xzf redis-2.6.17.tar.gz redis-2.6.17
+cd redis-2.6.17/
+make
+sudo make install
+cd ..
+
+sudo apt-get install -y imagemagick
+
+# Create templates
+PGUSER=postgres createdb -E UTF8 template_postgis
+PGUSER=postgres createlang -d template_postgis plpgsql
+PGUSER=postgres psql -d postgres -c \
+ "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis'"
+PGUSER=postgres psql -d template_postgis -c "CREATE EXTENSION postgis"
+PGUSER=postgres psql -d template_postgis -c "CREATE EXTENSION postgis_topology"
+PGUSER=postgres psql -d template_postgis -c "GRANT ALL ON geometry_columns TO PUBLIC;"
+PGUSER=postgres psql -d template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
+
+# Link previously built node-mapnik
+cd node-mapnik
+npm link
+cd ..
+
+# Clone windshaft, link mapnik to it and run tests
+git clone https://github.com/cartodb/windshaft
+cd windshaft
+npm install
+npm link mapnik
+PGUSER=postgres npm test
+cd ..

@@ -1,0 +1,9 @@
+#!/bin/bash
+cd /vagrant/opt
+
+git clone https://github.com/cartodb/mapnik-packaging -b cdb
+cd mapnik-packaging
+
+source mapnikenv.sh
+source build.sh
+build_mapnik

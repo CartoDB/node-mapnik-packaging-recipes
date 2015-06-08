@@ -26,6 +26,7 @@ sudo apt-get install -y \
     libtiff-dev \
     libcairo2 libcairo2-dev python-cairo python-cairo-dev \
     libcairomm-1.0-1 libcairomm-1.0-dev \
+    libpango1.0-dev \
     ttf-unifont ttf-dejavu ttf-dejavu-core ttf-dejavu-extra \
     build-essential python-nose \
     libgdal1-dev python-gdal \

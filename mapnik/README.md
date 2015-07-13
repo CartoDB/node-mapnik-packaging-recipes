@@ -1,4 +1,4 @@
-This uses [mapnik-packaging](https://github.com/mapnik/mapnik-packaging) to download, compile and package all dependencies requited to package the mapnik sdk.
+This uses [mapnik-packaging](https://github.com/CartoDB/mapnik-packaging) to download, compile and package all dependencies requited to package the mapnik sdk.
 
 # How to package and publish the mapnik sdk
 

@@ -27,7 +27,7 @@ PGUSER=postgres psql -d template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUB
 
 # Link previously built node-mapnik
 cd node-mapnik
-npm link
+sudo npm link
 cd ..
 
 # Clone windshaft, link mapnik to it and run tests

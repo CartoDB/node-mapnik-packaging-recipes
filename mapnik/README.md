@@ -7,7 +7,8 @@ vagrant up
 vagrant ssh
 cd /vagrant
 
-./scripts/provision
+source ./scripts/provision
+cd /vagrant
 ./scripts/package
 ```
 

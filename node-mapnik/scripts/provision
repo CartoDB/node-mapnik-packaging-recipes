@@ -4,6 +4,8 @@ cd /vagrant/opt
 
 echo -e 'LANG=en_US.UTF-8\nLC_ALL=en_US.UTF-8' | sudo tee /etc/default/locale
 source /etc/default/locale
+export LANG LC_ALL
+export NPM_CONFIG_PREFIX=~/.npm-global
 
 sudo apt-get update
 sudo apt-get install -y python-software-properties
@@ -33,6 +35,9 @@ sudo apt-get install -y \
     libsqlite3-dev \
     git-core \
     nodejs
+
+# install a newer npm
+npm install -g npm@2.14.16
 
 # use a newer protobuf-compiler
 wget https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz

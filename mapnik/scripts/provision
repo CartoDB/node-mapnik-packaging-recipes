@@ -4,6 +4,7 @@ cd /vagrant/opt
 
 echo -e 'LANG=en_US.UTF-8\nLC_ALL=en_US.UTF-8' | sudo tee /etc/default/locale
 source /etc/default/locale
+export LANG LC_ALL
 
 sudo apt-get update
 sudo apt-get install -y git-core
